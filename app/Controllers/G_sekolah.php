@@ -4,9 +4,18 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\Mg_sekolah;
+use App\Models\Mg_kelas;
 
 class G_sekolah extends BaseController
 {
+    protected $session;
+
+    function __construct()
+    {
+        $this->session = \Config\Services::session();
+        $this->session->start();
+    }
+
     public function index()
     {
         helper(['form', 'url']);
@@ -14,6 +23,10 @@ class G_sekolah extends BaseController
         $data = [
             'tampildata' => $this->Mg_sekolah->get_all_sekolah()
         ];
+        $data['kelasaktif'] = $this->session->get('nama');
+        $data['id_kelas'] = $this->session->get('id_kelas');
+        $this->Mg_kelas = new Mg_kelas();
+        $data['kelass'] = $this->Mg_kelas->get_all_kelas();
         return view('t_guru/sekolah', $data);
     }
 

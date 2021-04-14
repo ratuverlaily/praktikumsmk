@@ -4,28 +4,22 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Mg_praktikum extends Model
+class Mg_games extends Model
 {
-    var $table = 'praktikum';
+    var $table = 'praktikum_games';
 
     public function __construct()
     {
         parent::__construct();
         //$this->load->database();
         $db = \Config\Database::connect();
-        $builder = $db->table('praktikum');
+        $builder = $db->table('praktikum_games');
     }
 
-    public function getlastid()
-    {
-        $query = $this->db->query('SELECT id_praktikum as id FROM `praktikum` order by id_praktikum DESC limit 1');
-        return $query->getRow();
-    }
-
-    public function get_all_praktikum()
+    public function get_all_games()
     {
         //       $query = $this->db->table('praktikum');
-        $query = $this->db->query('select * from praktikum');
+        $query = $this->db->query('select a.judul as judul, b.judul as modul, a.id_games as id_games from praktikum_games a INNER JOIN modul b ON a.id_modul = b.id_modul');
         //      print_r($query->getResult());
         // $query = $this->db->get();
         return $query->getResult();
@@ -37,13 +31,6 @@ class Mg_praktikum extends Model
         $query =  $this->db->query($sql);
 
         return $query->getRow();
-    }
-
-    public function get_all_by_id($id)
-    {
-        $sql = 'SELECT * FROM `praktikum_dikelas` as a INNER JOIN praktikum as b ON a.id_praktikum = b.id_praktikum where a.id_kelas =' . $id;
-        $query =  $this->db->query($sql);
-        return $query->getResult();
     }
 
     public function praktikum_add($data)

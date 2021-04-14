@@ -9,62 +9,10 @@
             <div class="card-body">
                 <br />
                 <div class="alert alert-primary" role="alert">
-                    <h5 align="center"><b>DAFTAR KELAS PRAKTIKUM</b></h5>
+                    <h6 align="center"><b>DAFTAR KELAS</b></h6>
                 </div>
-                <button class="btn btn-primary" onclick="add_kelas()"><i class="fas fa-plus-square"></i></button>
-                <br /><br />
-                <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Kelas</th>
-                            <th>Jurusan</th>
-                            <th>Jumlah</th>
-                            <th>Kode</th>
-                            <th align="center">Status</th>
-                            <th style="width:80px;">Action
-                                </p>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1;
-                        foreach ($kelass as $kelas) { ?>
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $kelas->nama; ?></td>
-                                <td><?php echo $kelas->jurusan; ?></td>
-                                <td><?php echo $kelas->jumlah; ?></td>
-                                <td><b><?php echo $kelas->kode; ?></b></td>
-                                <td align="center">
-                                    <?php if ($kelas->status_aktif == 0) { ?>
-                                        <button class="btn btn-primary" onclick="aktifasi(<?php echo $kelas->id_kelas; ?>)">Aktif</button>
-                                    <?php } else { ?>
-                                        <button class="btn btn-warning" onclick="aktifasi(<?php echo $kelas->id_kelas; ?>)">Non Aktif</button>
-                                    <?php } ?>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="edit_kelas(<?php echo $kelas->id_kelas; ?>)"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-primary" onclick="delete_kelas(<?php echo $kelas->id_kelas; ?>)"><i class="fas fa-trash-alt"></i></button>
 
-                                </td>
-                            </tr>
-                        <?php } ?>
 
-                    </tbody>
-
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Jurusan</th>
-                            <th>Jumlah</th>
-                            <th>Kode</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                </table>
             </div>
         </div>
     </div>
@@ -132,9 +80,9 @@
     function save() {
         var url;
         if (save_method == 'add') {
-            url = "<?= base_url('G_kelas/kelas_add'); ?>";
+            url = "<?= base_url('S_kelas/kelas_add'); ?>";
         } else {
-            url = "<?= base_url('G_kelas/kelas_update'); ?>";
+            url = "<?= base_url('S_kelas/kelas_update'); ?>";
         }
 
         // ajax adding data to database
@@ -179,7 +127,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Kelas Form</h4>
+                <h4 class="modal-title"><b>Daftar Kelas</b></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 
             </div>
@@ -189,22 +137,9 @@
                     <input type="hidden" value="" name="id_kelas" />
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Kelas</label>
+                            <label class="control-label col-md-3">Kode Kelas</label>
                             <div class="col-md-9">
-                                <input name="nama" placeholder="Kelas" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Jurusan</label>
-                            <div class="col-md-9">
-                                <input name="jurusan" placeholder="Jurusan" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Jumlah</label>
-                            <div class="col-md-9">
-                                <input name="jumlah" placeholder="Jumlah" class="form-control" type="text">
-
+                                <input name="kode_kelas" placeholder="Input Kode Kelas" class="form-control" type="text">
                             </div>
                         </div>
                     </div>

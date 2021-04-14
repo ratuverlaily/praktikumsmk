@@ -3,24 +3,68 @@
 <?= $this->section('page-content'); ?>
 <div class="container-fluid">
 
-    <!-- Page Heading -->
-    <h4 class="h4 mb-4 text-gray-800 text-center"><b>PRAKTIKUM</b></h4>
 
 
-    <div class="card mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Daftar Pratikum</h6>
-        </div>
-        <div class="card-body">
-            <div class="d-flex flex-row-reverse">Tanggal : <?php echo date('D', strtotime($tampildata['tanggal_publish'])); ?>, <?= $tampildata['tanggal_publish'] ?></div>
-            TEMA : <?= $tampildata['judul'] ?><br /><br />
-            <b>KETERANGAN</b>
-            <p><?= $tampildata['komentar'] ?></p><br />
-            Batas Pengumpulan : <?php echo date('D', strtotime($tampildata['tanggal_batas'])); ?>, <?= $tampildata['tanggal_batas'] ?></p>
-            <div class="d-flex flex-row bd-highlight mb-3">Dowonload Module : &nbsp;&nbsp;<a href="<?= base_url('file/modul1.pdf') ?>" target="_blank">Modul1.pdf</a>
-                view : <a href="<?= base_url('S_praktikum/viewpdf') ?>">Modul1.pdf</a>
+    <div class="col-sm-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <br />
+                <div class="alert alert-primary" role="alert">
+                    <h6 align="center"><b>PRAKTIKUM</b></h6>
+                </div>
+                <br />
+
+                <?php
+                $dt = json_encode($tampildata);
+                $hsl = json_decode($dt, true);
+                ?>
+                <div class="row">
+                    <div class="col-2">
+                        Tanggal Posting
+                    </div>
+                    <div class="col">
+                        : &nbsp;<?php echo $hsl['tgl_publis']; ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        Batas Pengumpulan
+                    </div>
+                    <div class="col">
+                        : &nbsp;<?php echo $hsl['tgl_batas']; ?>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-2">
+                        Topik
+                    </div>
+                    <div class="col">
+                        : &nbsp;<?php echo $hsl['judul']; ?>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-2">
+                        Komentar
+                    </div>
+                    <div class="col-12">
+                        <?php echo $hsl['komentar']; ?>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-2">
+                        Modul Praktikum
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary"><i class="fas fa-download"></i>&nbsp;</button>
+                        <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp;</button>
+                    </div>
+                </div><br />
+
+                <div class="d-flex justify-content-between bd-highlight mb-3">
+                    <div class="p-2 bd-highlight"><button type="button" class="btn btn-outline-info" onclick="location.href='<?= base_url('S_praktikum'); ?>?>'"><i class="fas fa-backward"></i></button></div>
+                    <div class="p-2 bd-highlight"><button type="button" class="btn btn-outline-info" onclick="location.href='<?= base_url('S_praktikum/mulaipraktikum'); ?>/<?php echo $hsl['id_praktikum'] ?>'"><i class="fas fa-forward"></i></button></div>
+                </div>
             </div>
-            <div class="d-flex flex-row-reverse"><button type="button" class="btn btn-primary">Mulai Praktium</button></div>
         </div>
     </div>
 </div>

@@ -4,21 +4,34 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\Mg_modul;
+use App\Models\Mg_kelas;
 
 class G_modul extends BaseController
 {
+    protected $session;
+
+    function __construct()
+    {
+        $this->session = \Config\Services::session();
+        $this->session->start();
+    }
+
     public function index()
     {
 
         helper(['form', 'url']);
         $this->Mg_modul = new Mg_modul();
         $data['moduls'] = $this->Mg_modul->get_all_modul();
+        $data['kelasaktif'] = $this->session->get('nama');
+        $this->Mg_kelas = new Mg_kelas();
+        $data['kelass'] = $this->Mg_kelas->get_all_kelas();
+        $data['id_kelas'] = $this->session->get('id_kelas');
         return view('t_guru/modul', $data);
     }
 
     public function modul_add()
     {
-        $request = service('request');
+        /*$request = service('request');
         $file = $request->getFile('photofile');
         echo "File Name :" . $file;
         die;
@@ -29,9 +42,9 @@ class G_modul extends BaseController
             echo "<br/>File Extension :" . $file->getExtension();
 
             $file->move('./public/upload', $file->getRandomName());
-        }
+        }*/
 
-        /*$request = service('request');
+        $request = service('request');
         helper(['form', 'url']);
         $this->Mg_modul = new Mg_modul();
 
@@ -42,7 +55,7 @@ class G_modul extends BaseController
             'jumlah' => $request->getPost('jumlah'),
         );
         $insert = $this->Mg_modul->modul_add($data);
-        echo json_encode(array("status" => TRUE));*/
+        echo json_encode(array("status" => TRUE));
     }
 
     public function ajax_edit($id)

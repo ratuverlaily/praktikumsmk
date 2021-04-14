@@ -2,34 +2,6 @@
 
 <?= $this->section('content'); ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#"><b>E-Learning</b></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Patnership</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Testimoni</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Contact Us</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <div class="container-fluid">
     <!-- Outer Row justify-content-center-->
     <div class="row">

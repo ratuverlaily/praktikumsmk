@@ -3,52 +3,38 @@
 <?= $this->section('page-content'); ?>
 <link rel="stylesheet" href="<?= base_url() ?>/css/jquery.dataTables.min.css">
 <script src="<?= base_url() ?>/js/jquery.dataTables.min.js"></script>
-<div class="container">
-    <h3 align="center">DAFTAR PRAKTIKUM</h3><br />
-    <button class="btn btn-success" onclick="add_modul()"><i class="glyphicon glyphicon-plus"></i> Add modul</button>
-    <br />
-    <br />
-    <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th scope="col">Judul</th>
-                <th scope="col">Tanggal Publish</th>
-                <th scope="col">Batas Pengumpulan</th>
-                <th scope="col">Status</th>
-                <th style="width:200px;">Action
-                    </p>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $no = 1;
-            foreach ($praktikums as $praktikum) { ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><?php echo $praktikum->judul; ?></td>
-                    <td><?php echo $praktikum->tanggal_publish; ?></td>
-                    <td><?php echo $praktikum->tanggal_batas; ?></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-warning" onclick="edit_modul(<?php echo $praktikum->id_praktikum; ?>)">Edit</button>
-                    </td>
-                </tr>
-            <?php } ?>
+<div class="container-fluid">
+    <div class="col-sm-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <br />
+                <div class="alert alert-primary" role="alert">
+                    <h6 align="center"><b>DAFTAR PRAKTIKUM</b></h6>
+                </div>
+                <br />
 
-        </tbody>
+                <?php $no = 1;
+                foreach ($praktikums as $praktikum) { ?>
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action" onclick="location.href='<?= base_url('S_praktikum/lihatdetail'); ?>/<?php echo $praktikum->id_praktikum ?>'">
+                            <div class='row'>
+                                <div class='col-sm-3'>Tanggal Posting : <?php echo $praktikum->tgl_publis; ?></div>
+                                <div class='col-sm-5'></div>
+                                <div class='col-sm-4'>Batas Pengumpulan : <?php echo $praktikum->tgl_batas; ?>
+                                </div>
+                                <div class='col-sm-12'><br /><b><i class="fa fa-tasks"></i>&nbsp;&nbsp;<?php echo $praktikum->judul; ?></b><br />
+                                    <hr />
+                                    <?php echo $praktikum->komentar; ?>
+                                </div>
+                            </div>
+                        </button>
+                    </div><br />
+                <?php } ?>
 
-        <tfoot>
-            <tr>
-                <th>No</th>
-                <th>Judul</th>
-                <th>Keterangan</th>
-                <th>Format</th>
-                <th>Tanggal</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
-    </table>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -65,55 +51,5 @@
         //$('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
     }
 </script>
-
-<!-- Bootstrap modal -->
-<div class="modal fade" id="modal_form" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Modul Form</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-            </div>
-            <div class="modal-body form">
-
-                <form action="<?= base_url('G_modul/modul_add'); ?>" id="form" class="form-horizontal" enctype="multipart/form-data">
-                    <input type="hidden" value="" name="id_modul" />
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Judul</label>
-                            <div class="col-md-9">
-                                <input name="judul" placeholder="Judul" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">keterangan</label>
-                            <div class="col-md-9">
-                                <input name="keterangan" placeholder="keterangan" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">keterangan1</label>
-                            <div class="col-md-9">
-                                <input name="keterangan" placeholder="keterangan1" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Upload File</label>
-                            <div class="col-md-9">
-                                <input name="photofile" type="file">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- End Bootstrap modal -->
 
 <?= $this->endSection(); ?>

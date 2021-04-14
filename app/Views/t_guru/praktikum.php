@@ -3,64 +3,200 @@
 <?= $this->section('page-content'); ?>
 <link rel="stylesheet" href="<?= base_url() ?>/css/jquery.dataTables.min.css">
 <script src="<?= base_url() ?>/js/jquery.dataTables.min.js"></script>
-<div class="container">
-    <h3 align="center">DAFTAR PRAKTIKUM</h3><br />
-    <button class="btn btn-success" onclick="add_modul()"><i class="glyphicon glyphicon-plus"></i> Add modul</button>
-    <br />
-    <br />
-    <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Judul</th>
-                <th>Keterangan</th>
-                <th>Format</th>
-                <th>Tanggal</th>
-                <th style="width:200px;">Action
-                    </p>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $no = 1;
-            foreach ($moduls as $modul) { ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><?php echo $modul->judul; ?></td>
-                    <td><?php echo $modul->keterangan; ?></td>
-                    <td><?php echo $modul->format; ?></td>
-                    <td><?php echo $modul->tanggal; ?></td>
-                    <td>
-                        <button class="btn btn-warning" onclick="edit_modul(<?php echo $modul->id_modul; ?>)">Edit</button>
-                        <button class="btn btn-danger" onclick="delete_modul(<?php echo $modul->id_modul; ?>)">Delete</button>
-                        <button class="btn btn-primary" onclick="delete_modul(<?php echo $modul->id_modul; ?>)">View</button>
-                    </td>
-                </tr>
-            <?php } ?>
+<script type="text/javascript" src="<?= base_url() ?>/datepacker/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/datepacker/bootstrap-datepicker.css">
 
-        </tbody>
+<div class="container-fluid">
+    <div class="col-sm-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <br />
+                <div class="alert alert-primary" role="alert">
+                    <h5 align="center"><b>DAFTAR KELAS PRAKTIKUM</b></h5>
+                </div>
+                <button class="btn btn-primary" onclick="add_praktikum()"><i class="fas fa-plus-square"></i></button>
+                <br /><br />
 
-        <tfoot>
-            <tr>
-                <th>No</th>
-                <th>Judul</th>
-                <th>Keterangan</th>
-                <th>Format</th>
-                <th>Tanggal</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
-    </table>
+                <?php $no = 1;
+                foreach ($praktikums as $praktikum) { ?>
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <div class='row'>
+                                <div class='col-sm-3'>Tanggal Posting : <?php echo $praktikum->tgl_publis; ?></div>
+                                <div class='col-sm-5'></div>
+                                <div class='col-sm-4'>Batas Pengumpulan : <?php echo $praktikum->tgl_batas; ?>
+                                </div>
+                                <div class='col-sm-12'><br /><b><i class="fa fa-tasks"></i>&nbsp;&nbsp;<?php echo $praktikum->judul; ?></b><br />
+                                    <hr />
+                                    <?php echo $praktikum->komentar; ?>
+                                </div>
+                                <div class="col-sm-7"></div>
+                            </div>
+                        </button>
+                    </div><br />
+                <?php } ?>
+
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- Bootstrap modal -->
+<div class="modal fade" id="modal_form" role="dialog">
+    <div class="modal-dialog mw-100 w-75">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title"><b>PRAKTIKUM</b></h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body form">
+
+                <form action="<?= base_url('G_modul/modul_add'); ?>" id="form" class="form-horizontal" enctype="multipart/form-data">
+                    <input type="hidden" value="" name="id_praktikum" />
+                    <div class="row">
+                        <!--input data-->
+                        <div class="col-md-7">
+                            <div class="card border-secondary mb-3" style="max-width: 50rem;">
+                                <div class="card-body text-secondary">
+                                    <div class="alert alert-primary" role="alert">
+                                        <h6 class="card-title text-center"><b>INPUT DATA</b></h6>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="control-label col-md-3 text-align: right">Judul</label>
+                                            <input name="judul" placeholder="Judul" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="control-label col-md-3">Komentar</label>
+                                            <textarea name="komentar" class="form-control" id="exampleFormControlTextarea1" placeholder="Komentar" rows="10"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- input kelas -->
+                        <div class="col-md-5">
+                            <div class="card border-secondary mb-3" style="max-width: 40rem;">
+                                <div class="card-body text-secondary">
+                                    <div class="alert alert-primary" role="alert">
+                                        <h6 class="card-title text-center"><b>INPUT KELAS</b></h6>
+                                    </div>
+                                    <div class="row">
+                                        <?php $no = 1;
+                                        foreach ($kelass as $kelas) { ?>
+                                            <div class="col-4">
+                                                <div class="form-check">
+                                                    <input name="kelas[]" class="form-check-input" type="checkbox" value="<?php echo $kelas->id_kelas ?>" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        <?php echo $kelas->nama; ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        <?php $no++;
+                                        } ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- input tanggal batas -->
+                            <div class="card border-secondary mb-3" style="max-width: 40rem;">
+                                <div class="card-body text-secondary">
+                                    <div class="alert alert-primary" role="alert">
+                                        <h6 class="card-title text-center"><b>BATAS PENGUMPULAN</b></h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 dates">
+                                            <label>Tanggal</label>
+                                            <input name="tanggal_batas" type="text" class="form-control" id="usr1" name="event_date" placeholder="YYYY-MM-DD" autocomplete="off">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Waktu</label>
+                                            <input name="waktu_batas" type="text" class="form-control" placeholder="8.30" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- tanggal posting -->
+                            <div class="card border-secondary mb-3" style="max-width: 40rem;">
+                                <div class="card-body text-secondary">
+                                    <div class="alert alert-primary" role="alert">
+                                        <h6 class="card-title text-center"><b>POSTING</b></h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 dates">
+                                            <label>Tanggal</label>
+                                            <input name="tanggal_posting" type="text" class="form-control" id="usr1" name="event_date" placeholder="YYYY-MM-DD" autocomplete="off">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Waktu</label>
+                                            <input name="waktu_posting" type="text" class="form-control" placeholder="8.30" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- input praktikum -->
+                        <div class="col-md-12">
+                            <div class="card border-secondary mb-3" style="max-width: 100rem;">
+                                <div class="card-body text-secondary">
+                                    <div class="alert alert-primary" role="alert">
+                                        <h6 class="card-title text-center"><b>JENIS PRAKTIKUM</b></h6>
+                                    </div>
+                                    <div class="row">
+
+                                        <?php $no = 1;
+                                        foreach ($games as $game) { ?>
+                                            <div class="col-4">
+                                                <div class="form-check">
+                                                    <input name="games" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="<?php echo $game->id_games ?>">
+                                                    <label class="form-check-label" for="exampleRadios2">
+                                                        <b><?php echo $game->judul; ?></b><br />
+                                                        <small><?php echo $game->modul; ?></small><br />
+                                                        <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></button>
+                                                        <hr />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal -->
+
 <script type="text/javascript">
+    $(function() {
+        $('.dates #usr1').datepicker({
+            'format': 'yyyy-mm-dd',
+            'autoclose': true
+        });
+    });
+
     $(document).ready(function() {
         $('#table_id').DataTable();
     });
     var save_method; //for save method string
     var table;
 
-    function add_modul() {
+    function add_praktikum() {
         save_method = 'add';
         $('#form')[0].reset(); // reset form on modals
         $('#modal_form').modal('show'); // show bootstrap modal
@@ -97,9 +233,9 @@
     function save() {
         var url;
         if (save_method == 'add') {
-            url = "<?= base_url('G_modul/modul_add'); ?>";
+            url = "<?= base_url('G_praktikum/praktikum_add'); ?>";
         } else {
-            url = "<?= base_url('G_modul/modul_update'); ?>";
+            url = "<?= base_url('G_praktikum/praktikum_update'); ?>";
         }
 
         // ajax adding data to database
@@ -137,56 +273,8 @@
 
         }
     }
+
+    $('#sandbox-container input').datepicker({});
 </script>
-
-<!-- Bootstrap modal -->
-<div class="modal fade" id="modal_form" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Modul Form</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-
-            </div>
-            <div class="modal-body form">
-
-                <form action="<?= base_url('G_modul/modul_add'); ?>" id="form" class="form-horizontal" enctype="multipart/form-data">
-                    <input type="hidden" value="" name="id_modul" />
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Judul</label>
-                            <div class="col-md-9">
-                                <input name="judul" placeholder="Judul" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">keterangan</label>
-                            <div class="col-md-9">
-                                <input name="keterangan" placeholder="keterangan" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">keterangan1</label>
-                            <div class="col-md-9">
-                                <input name="keterangan" placeholder="keterangan1" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Upload File</label>
-                            <div class="col-md-9">
-                                <input name="photofile" type="file">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- End Bootstrap modal -->
 
 <?= $this->endSection(); ?>

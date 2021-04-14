@@ -3,54 +3,62 @@
 <?= $this->section('page-content'); ?>
 <link rel="stylesheet" href="<?= base_url() ?>/css/jquery.dataTables.min.css">
 <script src="<?= base_url() ?>/js/jquery.dataTables.min.js"></script>
-<div class="container">
-    <h3 align="center">DAFTAR MODUL</h3><br />
-    <button class="btn btn-success" onclick="add_modul()"><i class="glyphicon glyphicon-plus"></i> Add modul</button>
-    <br />
-    <br />
-    <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Judul</th>
-                <th>Keterangan</th>
-                <th>Format</th>
-                <th>Tanggal</th>
-                <th style="width:200px;">Action
-                    </p>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $no = 1;
-            foreach ($moduls as $modul) { ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><?php echo $modul->judul; ?></td>
-                    <td><?php echo $modul->keterangan; ?></td>
-                    <td><?php echo $modul->format; ?></td>
-                    <td><?php echo $modul->tanggal; ?></td>
-                    <td>
-                        <button class="btn btn-warning" onclick="edit_modul(<?php echo $modul->id_modul; ?>)">Edit</button>
-                        <button class="btn btn-danger" onclick="delete_modul(<?php echo $modul->id_modul; ?>)">Delete</button>
-                        <button class="btn btn-primary" onclick="delete_modul(<?php echo $modul->id_modul; ?>)">View</button>
-                    </td>
-                </tr>
-            <?php } ?>
+<div class="container-fluid">
+    <div class="col-sm-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <br />
+                <div class="alert alert-primary" role="alert">
+                    <h5 align="center"><b>DAFTAR MODUL / FILE</b></h5>
+                </div><br />
+                <button class="btn btn-primary" onclick="add_modul()"><i class="fas fa-plus-square"></i></button>
+                <br /><br />
+                <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Judul</th>
+                            <th>Keterangan</th>
+                            <th>Format</th>
+                            <th>Tanggal</th>
+                            <th style="width:125px;">Action
+                                </p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($moduls as $modul) { ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $modul->judul; ?></td>
+                                <td><?php echo $modul->keterangan; ?></td>
+                                <td><?php echo $modul->format; ?></td>
+                                <td><?php echo $modul->tanggal; ?></td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="edit_modul(<?php echo $modul->id_modul; ?>)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-primary" onclick="delete_modul(<?php echo $modul->id_modul; ?>)"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-primary" onclick="delete_modul(<?php echo $modul->id_modul; ?>)"><i class="fas fa-eye"></i></button>
+                                </td>
+                            </tr>
+                        <?php } ?>
 
-        </tbody>
+                    </tbody>
 
-        <tfoot>
-            <tr>
-                <th>No</th>
-                <th>Judul</th>
-                <th>Keterangan</th>
-                <th>Format</th>
-                <th>Tanggal</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
-    </table>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Judul</th>
+                            <th>Keterangan</th>
+                            <th>Format</th>
+                            <th>Tanggal</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">

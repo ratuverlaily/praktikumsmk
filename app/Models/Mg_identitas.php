@@ -6,21 +6,22 @@ use CodeIgniter\Model;
 
 class Mg_identitas extends Model
 {
-    function __construct()
+    protected $table;
+
+    public function __construct()
     {
-        $this->db = db_connect();
+
+        parent::__construct();
+        $db = \Config\Database::connect();
+        $this->table = $this->db->table('uploads');
     }
 
-    function tampildata()
+    /*public function get_uploads()
     {
-        //query builder
-        return $this->db->table('userdetail')->get();
+        return $this->table->get()->getResultArray();
     }
-
-    function listdetail($idp)
+    public function insert_gambar($data)
     {
-        $query = $this->db->table('praktikum');
-        $getquery = $query->getWhere(['id_praktikum' => $idp]);
-        return $getquery;
-    }
+        return $this->table->insert($data);
+    }*/
 }

@@ -12,6 +12,11 @@
 
         <!-- Divider Guru-->
         <hr class="sidebar-divider my-0">
+        <button type="button" class="btn btn-warning btn-sm"><b>KELAS ( <?php echo $kelasaktif; ?> )</b></button>
+        <br /><br />
+
+        <!-- Divider Guru-->
+        <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
@@ -31,24 +36,61 @@
         <!-- Nav Item - Nilai Praktikum-->
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('G_identitas'); ?>">
-                <i class="fas fa-chalkboard-teacher"></i>
-                <span>Identitas Guru</span>
+                <i class="fas fa-award"></i>
+                <span>Penilaian Praktikum</span>
             </a>
         </li>
 
-        <!-- Nav Item - Identitas Siswa-->
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('G_kelas'); ?>">
-                <i class="fas fa-users"></i>
-                <span>Daftar Kelas</span>
-            </a>
+            <div class="nav-link">
+                <a class="text-decoration-none text-white" style="active { color: yellow; }" href="<?= base_url('G_kelas'); ?>">
+                    <i class="fas fa-users"></i>
+                    <span>Daftar Kelas</span>
+                </a>
+                <ul>
+                    <?php foreach ($kelass as $kelas) {
+                        if ($kelas->id_kelas == $id_kelas) { ?>
+                            <li>
+                                <a class="text-decoration-none text-warning" onclick="aktifasi(<?php echo $kelas->id_kelas; ?>)" style="cursor:pointer;">
+                                    <span><?php echo $kelas->nama; ?>&nbsp;( Active )</span>
+                                </a>
+                            </li>
+                        <?php } else { ?>
+                            <li>
+                                <a class="text-decoration-none text-white" onclick="aktifasi(<?php echo $kelas->id_kelas; ?>)" style="cursor:pointer;">
+                                    <span><?php echo $kelas->nama; ?></span>
+                                </a>
+                            </li>
+                    <?php }
+                    } ?>
+                </ul>
+            </div>
         </li>
+
+        <script type="text/javascript">
+            function aktifasi(id) {
+                // ajax adding data to database
+                $.ajax({
+                    url: "<?= base_url('G_kelas/aktifasi_edit'); ?>/" + id,
+                    type: "POST",
+                    data: $('#form').serialize(),
+                    dataType: "JSON",
+                    success: function(data) {
+                        //if success close modal and reload ajax table
+                        location.reload(); // for reload a page
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error adding / update data');
+                    }
+                });
+            }
+        </script>
 
         <!-- Nav Item - Identitas Siswa-->
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('G_kelas2'); ?>">
+            <a class="nav-link" href="<?= base_url('G_siswa'); ?>">
                 <i class="fas fa-users"></i>
-                <span>Daftar Kelas2</span>
+                <span>Daftar Siswa / Siswi</span>
             </a>
         </li>
 
@@ -57,6 +99,22 @@
             <a class="nav-link" href="<?= base_url('G_sekolah'); ?>">
                 <i class="fas fa-school"></i>
                 <span>Identitas Sekolah</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Nilai Praktikum-->
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('G_identitas'); ?>">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Identitas Guru</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Identitas Siswa-->
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('G_kelas2'); ?>">
+                <i class="fas fa-users"></i>
+                <span>Daftar Kelas2</span>
             </a>
         </li>
 
@@ -95,6 +153,11 @@
 
     <?php if (in_groups('siswa')) : ?>
 
+        <!-- Divider Guru-->
+        <hr class="sidebar-divider my-0">
+        <button type="button" class="btn btn-warning btn-sm"><b>KELAS ( <?php echo $kelasaktif; ?> )</b></button>
+        <br />
+
         <!-- Divider siswa -->
         <hr class="sidebar-divider">
 
@@ -105,15 +168,23 @@
 
         <!-- Nav Item - Nilai Praktikum-->
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="<?= base_url('S_kelas'); ?>">
+                <i class="fas fa-school"></i>
+                <span>Daftar Kelas</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Nilai Praktikum-->
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('S_hasilpraktikum'); ?>">
                 <i class="fas fa-star"></i>
-                <span>Nilai Praktikum</span>
+                <span>Hasil Praktikum</span>
             </a>
         </li>
 
         <!-- Nav Item - Identitas Siswa-->
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="<?= base_url('S_identitas'); ?>">
                 <i class="fas fa-id-card"></i>
                 <span>Identitas Siswa</span>
             </a>
@@ -159,26 +230,6 @@
         </li>
 
     <?php endif; ?>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!--<li class="nav-item active">
-    <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-        <i class="fas fa-fw fa-folder"></i>
-        <span>Chat</span>
-    </a>
-    <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item active" href="blank.html">Blank Page</a>
-        </div>
-    </div>
-</li>-->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
