@@ -25,7 +25,7 @@ class User extends BaseController
             $hsl = json_decode($dt, true);
             $this->session->set($hsl);
 
-            $getakses = "t_siswa/index";
+            $getakses = "t_siswa/home";
         } else {
             $this->Mg_kelas = new Mg_kelas();
             $data = $this->Mg_kelas->get_onkelas();
@@ -41,26 +41,30 @@ class User extends BaseController
 
     public function index()
     {
-        /*$this->Userdetail = new Userdetail();
+        $this->Userdetail = new Userdetail();
         $valueuser = $this->Userdetail->getuserdetail();
-        //dd($data);
-
-
-        if (!empty($valueuser)) {*/
-        $v_akses = $this->getuserakses();
-        if (in_groups('siswa')) {
-            $data['kelasaktif'] = $this->session->get('nama');
-            $data['id_kelas'] = $this->session->get('id_kelas');
+        if (!empty($valueuser)) {
+            $v_akses = $this->getuserakses();
+            if (in_groups('siswa')) {
+                if (empty($this->session->get('id_kelas'))) {
+                    $data['kelasaktif'] = "BELUM TERDAFTAR";
+                    $data['status_kelas'] = 0;
+                    $v_halaman = 't_siswa/kelas';
+                } else {
+                    $data['kelasaktif'] = $this->session->get('nama');
+                    $data['id_kelas'] = $this->session->get('id_kelas');
+                    $v_halaman = $v_akses;
+                }
+            } else {
+                $data['kelasaktif'] = $this->session->get('nama');
+                $data['id_kelas'] = $this->session->get('id_kelas');
+                $this->Mg_kelas = new Mg_kelas();
+                $data['kelass'] = $this->Mg_kelas->get_all_kelas();
+                $v_halaman = $v_akses;
+            }
+            return view($v_halaman, $data);
         } else {
-            $data['kelasaktif'] = $this->session->get('nama');
-            $data['id_kelas'] = $this->session->get('id_kelas');
-            $this->Mg_kelas = new Mg_kelas();
-            $data['kelass'] = $this->Mg_kelas->get_all_kelas();
+            return view('auth/identitas');
         }
-        return view($v_akses, $data);
-        /*} else {
-            return view("auth/identitas");
-            echo 2;
-        }*/
     }
 }
