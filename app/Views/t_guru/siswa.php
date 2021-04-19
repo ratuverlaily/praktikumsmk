@@ -19,7 +19,6 @@
                             <th>username</th>
                             <th>Jenis Kelamin</th>
                             <th>No Telpon</th>
-                            <th>Media Sosial</th>
                             <th style="width:30px;">Action
                             </th>
                         </tr>
@@ -32,7 +31,6 @@
                                 <td><?php echo $user->username; ?></td>
                                 <td><?php echo $user->jenis_kelamin; ?></td>
                                 <td><?php echo $user->no_telpon; ?></td>
-                                <td><?php echo $user->media_sosial; ?></td>
                                 <td align="center"><button class="btn btn-primary" onclick="edit_modul(<?php echo $user->id_user; ?>)"><i class="fas fa-envelope"></i></button></td>
                             </tr>
                         <?php } ?>
@@ -45,7 +43,6 @@
                             <th>username</th>
                             <th>Jenis Kelamin</th>
                             <th>No Telpon</th>
-                            <th>Media Sosial</th>
                             <th style="width:100px;">Action
                             </th>
                         </tr>
