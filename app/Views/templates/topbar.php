@@ -184,7 +184,7 @@
                         <b>( Pengajar )</b>
                     <?php endif; ?>
                 </span>
-                <img class="img-profile rounded-circle" src="<?= base_url() ?>/img/<?= user()->user_image; ?>">
+                <img class="img-profile rounded-circle" src="<?= base_url() ?>/uploads/<?= user()->user_image; ?>" style="width:30px;">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
