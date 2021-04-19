@@ -19,12 +19,20 @@ class S_praktikum extends BaseController
     public function index()
     {
         helper(['form', 'url']);
-        $this->Ms_praktikum = new Ms_praktikum();
-        $data['kelasaktif'] = $this->session->get('nama');
-        $data['id_kelas'] = $this->session->get('id_kelas');
-        $data['praktikums'] = $this->Ms_praktikum->get_all_praktikum($this->session->get('id_kelas'));
 
-        return view('t_siswa/praktikum', $data);
+        if (empty($this->session->get('id_kelas'))) {
+            $data['kelasaktif'] = 'BELUM TERDAFTAR';
+            $data['status_kelas'] = 0;
+
+            return view('t_siswa/kelas', $data);
+        } else {
+            $this->Ms_praktikum = new Ms_praktikum();
+            $data['kelasaktif'] = $this->session->get('nama');
+            $data['id_kelas'] = $this->session->get('id_kelas');
+            $data['praktikums'] = $this->Ms_praktikum->get_all_praktikum($this->session->get('id_kelas'));
+
+            return view('t_siswa/praktikum', $data);
+        }
     }
 
     public function lihatdetail($id = null)
