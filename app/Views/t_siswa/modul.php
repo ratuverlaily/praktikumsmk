@@ -8,6 +8,16 @@
     <div class="col-sm-12">
         <div class="card m-b-30">
             <div class="card-body">
+
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $status ?>" href="<?php echo base_url('S_modul'); ?>">Modul Praktikum</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Files</a>
+                    </li>
+                </ul>
+
                 <br />
                 <div class="alert alert-primary" role="alert">
                     <h6 align="center"><b>DAFTAR MODUL</b></h6>
@@ -36,6 +46,7 @@
                                 <td><?php echo $modul->format; ?></td>
                                 <td><?php echo $modul->tanggal; ?></td>
                                 <td align="center">
+                                    <a class="btn btn-primary" href="<?= base_url(); ?>/berkas/download/"><i class="fas fa-download"></i></a>
                                     <button class="btn btn-primary" onclick="delete_modul(<?php echo $modul->id_modul; ?>)"><i class="fas fa-eye"></i></button>
                                 </td>
                             </tr>
