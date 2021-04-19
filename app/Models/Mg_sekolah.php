@@ -16,13 +16,13 @@ class Mg_sekolah extends Model
         $builder = $db->table('sekolah');
     }
 
-    public function get_all_sekolah()
+    public function get_all_sekolah($id)
     {
         //       $query = $this->db->table('sekolah');
-        $query = $this->db->query('select * from sekolah');
-        //print_r($query->getResult());
+        $query = $this->db->query('select * from sekolah where id_guru =' . $id);
+        //print_r($query->getResult()); 
         // $query = $this->db->get();
-        return $query->getResult();
+        return $query->getRow();
     }
 
     public function sekolah_add($data)
