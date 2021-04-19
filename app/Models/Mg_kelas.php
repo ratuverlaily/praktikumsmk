@@ -33,7 +33,7 @@ class Mg_kelas extends Model
 
     public function search_kodekelas_by_id($kode)
     {
-        $sql = "select * from kelas where kode ='" . $kode . "'";
+        $sql = "select id_kelas , kode, nama , jurusan, jumlah , id_user as id_guru from kelas where kode ='" . $kode . "'";
         $query =  $this->db->query($sql);
         return $query->getRow();
     }
