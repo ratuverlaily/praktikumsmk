@@ -168,17 +168,17 @@
 
         <!-- Nav Item - Nilai Praktikum-->
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('S_kelas'); ?>">
-                <i class="fas fa-school"></i>
-                <span>Daftar Kelas</span>
+            <a class="nav-link" href="<?= base_url('S_hasilpraktikum'); ?>">
+                <i class="fas fa-star"></i>
+                <span>Hasil Praktikum</span>
             </a>
         </li>
 
         <!-- Nav Item - Nilai Praktikum-->
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('S_hasilpraktikum'); ?>">
-                <i class="fas fa-star"></i>
-                <span>Hasil Praktikum</span>
+            <a class="nav-link" href="<?= base_url('S_kelas'); ?>">
+                <i class="fas fa-school"></i>
+                <span>Daftar Kelas</span>
             </a>
         </li>
 
@@ -192,7 +192,7 @@
 
         <!-- Nav Item - Daftar siswa-->
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="<?= base_url('S_siswa'); ?>">
                 <i class="fas fa-list"></i>
                 <span>Daftar siswa</span>
             </a>
