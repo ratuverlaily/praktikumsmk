@@ -11,7 +11,39 @@
                 <div class="alert alert-primary" role="alert">
                     <h6 align="center"><b>DAFTAR KELAS</b></h6>
                 </div>
+                <?php if ($status_kelas == 0) { ?>
+                    <button class="btn btn-success" onclick="add_kelas()"><i class="glyphicon glyphicon-plus"></i> Add Kelas</button>
+                <?php } ?>
+                <br /><br />
 
+                <?php if ($status_kelas != 0) { ?>
+                    <div class="card w-50 mx-auto">
+                        <div class="card-body">
+                            <div class="alert alert-danger" role="alert">
+                                <h8 class="card-title"><b>KELAS YANG DI AMBIL</b></h8>
+                            </div>
+
+                            <div class="row">
+                                <?php $data = json_decode(json_encode($kelass), true);
+                                //dd($data);
+                                $jumlahdata = array_sum($data); ?>
+
+                                <div class="col-sm-4">Kode Kelas</div>
+                                <div class="col-sm-8">:&nbsp;&nbsp;<?php echo $data['kode']; ?></div>
+                                <div class="col-sm-4">Nama Kelas</div>
+                                <div class="col-sm-8">:&nbsp;&nbsp;<?php echo $data['nama']; ?></div>
+                                <div class="col-sm-4">Mata Pelajaran</div>
+                                <div class="col-sm-8">:&nbsp;&nbsp;<?php echo $data['jurusan']; ?></div>
+                                <div class="col-sm-4">Pengajar</div>
+                                <div class="col-sm-8">:&nbsp;&nbsp;<b><?php echo $nama_guru; ?></b></div>
+                                <div class="col-sm-4">Status</div>
+                                <div class="col-sm-8">:&nbsp;&nbsp;<button type="button" class="btn btn-danger" disabled>Aktif</button></div>
+                                <div class="col-sm-10"></div>
+                                <div class="col-sm-2"><button class="btn btn-primary" onclick="edit_kelas(<?php echo $data['id_kelas']; ?>)"><i class="fas fa-trash-alt"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
 
             </div>
         </div>
