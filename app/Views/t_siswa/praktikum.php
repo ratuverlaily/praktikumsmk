@@ -13,21 +13,52 @@
                 </div>
                 <br />
 
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Halaman 1
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button">Action</button>
+                        <button class="dropdown-item" type="button">Another action</button>
+                        <button class="dropdown-item" type="button">Something else here</button>
+                    </div>
+                </div><br /><br />
+
                 <?php $no = 1;
                 foreach ($praktikums as $praktikum) { ?>
-                    <div class="list-group">
+                    <div class="list-group" style="background-color: #E9EFF1;">
                         <button type="button" class="list-group-item list-group-item-action" onclick="location.href='<?= base_url('S_praktikum/lihatdetail'); ?>/<?php echo $praktikum->id_praktikum ?>'">
                             <div class='row'>
-                                <div class='col-sm-3'>Tanggal Posting : <?php echo $praktikum->tgl_publis; ?></div>
-                                <div class='col-sm-5'></div>
-                                <div class='col-sm-4'>Batas Pengumpulan : <?php echo $praktikum->tgl_batas; ?>
+                                <div class='col-sm-1'>
+                                    <img class="img-profile rounded-circle" src="<?= base_url() ?>/uploads/<?= user()->user_image; ?>" style="width:50px;height:50px;">
                                 </div>
+                                <div class='col-sm'>
+                                    <div class="row">
+                                        <div class='col-sm-3'><small> Posting : <?php echo $praktikum->tgl_publis; ?></small></div>
+                                        <div class='col-sm-6'></div>
+                                        <div class='col-sm-3'><small> Pengumpulan : <?php echo $praktikum->tgl_batas; ?></small></div>
+                                    </div>
+                                </div>
+
                                 <div class='col-sm-12'><br /><b><i class="fa fa-tasks"></i>&nbsp;&nbsp;<?php echo $praktikum->judul; ?></b><br />
                                     <hr />
                                     <?php echo $praktikum->komentar; ?>
                                 </div>
                             </div>
                         </button>
+                        <div class='col-sm-12 text-black'><br />
+                            <div class="col-auto">
+                                Komentar
+                                <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="komentar">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="far fa-paper-plane"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
                     </div><br />
                 <?php } ?>
 
