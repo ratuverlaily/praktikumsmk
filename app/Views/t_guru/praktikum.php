@@ -22,15 +22,21 @@
                     <div class="list-group">
                         <button type="button" class="list-group-item list-group-item-action">
                             <div class='row'>
-                                <div class='col-sm-3'>Tanggal Posting : <?php echo $praktikum->tgl_publis; ?></div>
-                                <div class='col-sm-5'></div>
-                                <div class='col-sm-4'>Batas Pengumpulan : <?php echo $praktikum->tgl_batas; ?>
+                                <div class='col-sm-2'>
+                                    <img class="img-profile rounded-circle w-25 h-200" src="<?= base_url() ?>/uploads/<?= user()->user_image; ?>">
                                 </div>
+                                <div class='col-sm-9'>
+                                    <div class="row">
+                                        <div class='col-sm-3'><small> Posting : <?php echo $praktikum->tgl_publis; ?></small></div>
+                                        <div class='col-sm-6'></div>
+                                        <div class='col-sm-3'><small> Pengumpulan : <?php echo $praktikum->tgl_batas; ?></small></div>
+                                    </div>
+                                </div>
+
                                 <div class='col-sm-12'><br /><b><i class="fa fa-tasks"></i>&nbsp;&nbsp;<?php echo $praktikum->judul; ?></b><br />
                                     <hr />
                                     <?php echo $praktikum->komentar; ?>
                                 </div>
-                                <div class="col-sm-7"></div>
                             </div>
                         </button>
                     </div><br />
