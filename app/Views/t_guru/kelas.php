@@ -175,11 +175,11 @@
 </script>
 
 <!-- Bootstrap modal -->
-<div class="modal fade" id="modal_form" role="dialog">
+<div class="modal fade" id="modal_form_kelas" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Kelas Form</h4>
+                <h4 class="modal-title"><b>Daftar Kelas</b></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 
             </div>
@@ -189,22 +189,9 @@
                     <input type="hidden" value="" name="id_kelas" />
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Kelas</label>
+                            <label class="control-label col-md-3">Kode Kelas</label>
                             <div class="col-md-9">
-                                <input name="nama" placeholder="Kelas" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Jurusan</label>
-                            <div class="col-md-9">
-                                <input name="jurusan" placeholder="Jurusan" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Jumlah</label>
-                            <div class="col-md-9">
-                                <input name="jumlah" placeholder="Jumlah" class="form-control" type="text">
-
+                                <input name="kode_kelas" placeholder="Input Kode Kelas" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
