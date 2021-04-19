@@ -21,7 +21,7 @@ class G_sekolah extends BaseController
         helper(['form', 'url']);
         $this->Mg_sekolah = new Mg_sekolah();
         $data = [
-            'tampildata' => $this->Mg_sekolah->get_all_sekolah()
+            'tampildata' => $this->Mg_sekolah->get_all_sekolah(user()->id),
         ];
         $data['kelasaktif'] = $this->session->get('nama');
         $data['id_kelas'] = $this->session->get('id_kelas');
